@@ -1,0 +1,125 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Shop Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'mysite/styles/seller_dashboard.css' %}" />
+</head>
+<body>
+<!-- <body onload="setTimeout(function() { document.frm1.submit() }, 5000)"> -->
+    <!-- <form action="/seller_dashboard"  method="post" name="frm1">
+        <input type="hidden" name="_id_" value=id />
+     </form> -->
+        
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+
+        <!-- <a class="navbar-brand"  href="javascript:window.location.href=window.location.href">Shop Name</a> -->
+      
+        <!-- <div class="collapse navbar-collapse" id="navbarTogglerDemo03"> -->
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+
+            <form action="/add_product_0" method="post"  >
+                {% csrf_token %}
+                <input type="hidden"  name="_id_" value={{id}}>
+              <!-- <button class="nav-link" >Add Product</button> -->
+              <button style="margin:2px;" class="btn btn-addProduct">Add Product</button>
+        </form>
+    </li>
+
+        <li class="nav-item">
+            <form action="/edit_product_0" method="post"  >
+
+                {% csrf_token %}
+                <input type="hidden"  name="_id_" value={{id}}>
+                <button style="margin:2px;" class="btn btn-addProduct">Edit Product</button>
+            </form>
+              </li>
+              <li class="nav-item">
+                <form action="/del_product_0" method="post"  >
+    
+                    {% csrf_token %}
+                    <input type="hidden"  name="_id_" value={{id}}>
+                    <button style="margin:2px;" class="btn btn-addProduct">Delete Product</button>
+                </form>
+                  </li>
+
+                  <li class="nav-item">
+                    <form action="/" method="post"  >
+        
+                        {% csrf_token %}
+                        <input type="hidden"  name="_id_" value={{id}}>
+                        <button style="margin:2px;" class="btn btn-addProduct">Log Out</button>
+                    </form>
+                      </li>
+
+          </ul>
+
+          
+        <!-- </div> -->
+      </nav>
+
+    <div class="container">
+
+        <h2 class="title"><b>Product List [Shop/Seller ID:{{id}}]</b></h2>
+    <!-- <form action="/add_product_0" method="post"  >
+        {% csrf_token %}
+        <input type="hidden"  name="_id_" value={{id}}>
+        <button style="margin:2px;" class="btn btn-addProduct">Add Products</button>
+    </form> -->
+        
+    <!-- <form action="/edit_product_0" method="post"  >
+
+        {% csrf_token %}
+        <input type="hidden"  name="_id_" value={{id}}>
+        <button style="margin:2px;" class="btn btn-addProduct">Edit Products</button>
+    </form> -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Product Desciption</th>
+                                <th>Price</th>
+                                <th>Preparation Time</th>
+                                <th>Items Available</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in data %}
+                            <tr>
+                            <!-- <td>{{ loop.index }}</td> -->
+                            {% for cell in row %}
+                              <td>{{ cell }}</td>
+                              {% endfor %}
+                            </tr>
+                            {% endfor %}
+
+
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% for message in messages %} 
+    <script type="text/javascript">
+      function my_func(){
+        alert('{{message}}');      
+       }       
+      my_func();
+     </script>
+    {% endfor %}
+    
+</body>
+</html>

@@ -1,0 +1,103 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Buyer Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static 'mysite/styles/seller_dashboard.css' %}" />
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+    <li class="nav-item">
+      <form action="/select_shop" method="post">
+
+        {% csrf_token %}
+        <input type="hidden" name="_id_" value={{id}}>
+        <button style="margin:2px;" class="btn btn-addProduct">Search Shop</button>
+      </form>
+    </li>
+    <li class="nav-item">
+      <form action="/" method="post">
+
+        {% csrf_token %}
+        <input type="hidden" name="_id_" value={{id}}>
+        
+        <button style="margin:2px;" class="btn btn-addProduct">Log Out</button>
+      </form>
+    </li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <form action="/cart" method="post">
+
+      {% csrf_token %}
+    <!-- <h1 class="title"><b>Shop Name {{shop_name}}</b></h1> -->
+
+      <h2 class="title"><b>Choose Items [Buyer ID:{{id}}]</b></h2>
+      <input type="hidden" name="_id_" value={{id}}>
+      <input type="hidden" name="shop_id" value={{shop_id}}>
+      
+     
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-wrap">
+            <table class="table">
+              <thead class="thead-primary"  >
+                <tr>
+                  <th>Product Name</th>
+                  <th>Product Desciption</th>
+                  <th>Price</th>
+                  <th>Preparation Time</th>
+                  <th>Items Available</th>
+                  <th>Add To Cart</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in data %}
+                <tr>
+                  {% for cell in row|slice:"1:" %}
+                    <td>{{ cell }}</td>
+
+                  {% endfor %}
+                  <td>
+                    <div class="form-outline">
+                      <input onkeydown="return false" type="number" max="{{row.5}}" min="0" name={{row.0}}  id="typeNumber" class="form-control" value="0" />
+                    </div>
+                  </td>
+                </tr>
+
+                {% endfor %}
+
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-block btn-lg fixed-bottom"> Confirm Order! </button>
+
+      </form>
+  </div>
+
+  {% for message in messages %}
+  <script type="text/javascript">
+    function my_func() {
+      alert('{{message}}');
+    }
+    my_func();
+  </script>
+  {% endfor %}
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <!-- <link rel="stylesheet" href="select_edit_product.css" />   -->
+  <link rel="stylesheet" href="{% static 'mysite/styles/select_edit_product.css' %}" />  
+  
+  <title>Select Edit Product</title>
+</head>
+
+<body>
+    <div class=" container">
+  <h2 class="title">Select Product To Edit </h2>
+
+ <form action="/edit_product" method="post">
+      
+  {% csrf_token %}
+  <div class="input-field">
+    <i class="fas fa-box"></i>
+    <select id="select-product" name="select_product" class="select-field">
+      <option selected disabled hidden>Select Product</option>
+
+      <!-- <option value="1">Biryani</option>
+      <option value="2">Chai</option>
+      <option value="3">Noodles</option>
+      <option value="4">Coffee</option>
+      <option value="5">Rice</option>
+      <option value="6">Pancake</option>
+      <option value="7">Juice Mango</option> -->
+      {% for row in data %}
+      <!-- <td>{{ loop.index }}</td> -->
+        <!-- <td>{{ cell }}</td> -->
+        <option value="{{row.0}}" > {{row.1}}</option>
+      <!-- </tr> -->
+      {% endfor %}
+    </select>
+  </div>
+  <input type="hidden"  name="_id_" value={{id}}>
+
+  <button id="proceed-btn" name="proceed-btn" class="btn">
+    Proceed
+  </button>
+</form>
+  </div>
+  {% for message in messages %} 
+  <script type="text/javascript">
+    function my_func(){
+      alert('{{message}}');      
+     }       
+    my_func();
+   </script>
+  {% endfor %}
+  
+
+  </body>
+
+</html>

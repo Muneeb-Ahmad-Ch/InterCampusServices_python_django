@@ -1,0 +1,95 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Cart</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'mysite/styles/seller_dashboard.css' %}" />
+</head>
+
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+
+        <!-- <a class="navbar-brand"  href="javascript:window.location.href=window.location.href">Shop Name</a> -->
+
+        <!-- <div class="collapse navbar-collapse" id="navbarTogglerDemo03"> -->
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+
+
+
+            <li class="nav-item">
+                <form action="/" method="post">
+
+                    {% csrf_token %}
+                    <input type="hidden" name="_id_" value={{id}}>
+                    <button style="margin:2px;" class="btn btn-addProduct">Log Out</button>
+                </form>
+            </li>
+
+        </ul>
+
+
+    </nav>
+
+    <div class="container">
+
+        <h2 class="title"><b>Cart Items List [Buyers ID:{{id}}]</b></h2>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr>
+                                <th>#</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Item Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in data %}
+                            <tr>
+                                <!-- <td>{{ loop.index }}</td> -->
+                                {% for cell in row %}
+                                <td>{{ cell }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <thead class="thead-primary">
+                            <tr>
+                                <th>-</th>
+                                <th>-</th>
+                                <th>-</th>
+                                <th>Total</th>
+                                <th >{{total_price}}</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% for message in messages %}
+    <script type="text/javascript">
+        function my_func() {
+            alert('{{message}}');
+        }
+        my_func();
+    </script>
+    {% endfor %}
+
+</body>
+
+</html>

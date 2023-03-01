@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'mysite/styles/create_shop.css' %}" />
+  <title>Select Shop</title>
+</head>
+
+<body>
+  <div class="container">
+    <h2 class="title"> Select Shop [Buyer:{{id}}] </h2>
+    <form action="/buyer_dashboard" method="post">
+      
+      {% csrf_token %}
+      <input type="hidden"  name="_id_" value={{id}}>
+      <input type="hidden" name="shop_id" value={{shop_id}}>
+      <input type="hidden" name="institute_id" value={{institute_id}}>
+      <input type="hidden" name="shop_category" value={{shop_category}}>
+
+
+      <!-- <div class="input-field">
+        <i class="fas fa-store"></i>
+        <input name="shop_name" type="text" placeholder="Shop Name" />
+      </div> -->
+
+
+      <div class="input-field">
+        <i class="fas fa-store"></i>
+        <select name="shop_id" class="select-field">
+          <option selected disabled hidden>Shops</option>
+          {% for row in data %}
+          <!-- <td>{{ loop.index }}</td> -->
+            <!-- <td>{{ cell }}</td> -->
+            <option value="{{row.0}}" > {{row.1}}</option>
+          <!-- </tr> -->
+          {% endfor %}
+ 
+        </select>
+      </div>
+      <button id="create-shop-btn" class="btn">
+        Select
+      </button>
+    </form>
+  </div>
+
+  {% for message in messages %} 
+  <script type="text/javascript">
+    function my_func(){
+      alert('{{message}}');      
+     }       
+    my_func();
+   </script>
+  {% endfor %}
+  
+</body>
+
+</html>

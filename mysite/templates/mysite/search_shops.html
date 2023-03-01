@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'mysite/styles/create_shop.css' %}" />
+  <title>Search Shops</title>
+</head>
+
+<body>
+  <div class="container">
+    <h2 class="title"> Search Shops [Buyer:{{id}}] </h2>
+    <form action="/select_shop" method="post">
+      
+      {% csrf_token %}
+      <input type="hidden"  name="_id_" value={{id}}>
+      <!-- <div class="input-field">
+        <i class="fas fa-store"></i>
+        <input name="shop_name" type="text" placeholder="Shop Name" />
+      </div> -->
+
+      <div class="input-field">
+        <i class="fas fa-school"></i>
+        <select name="institute_name" class="select-field">
+          <option selected disabled hidden>Institute Name</option>
+          <option value="1">Fast-NU Lahore</option>
+          <option value="2">GC Lahore</option>
+          <option value="3">PU Lahore</option>
+          <option value="4">UMT Lahore</option>
+        </select>
+      </div>
+      <div class="input-field">
+        <i class="fas fa-boxes"></i>
+        <select name="shop_category" class="select-field">
+          <option selected disabled hidden>Shop Category</option>
+          <option value="1">Bakery</option>
+          <option value="2">Book Shop</option>
+          <option value="3">Cafe</option>
+          <option value="4">Coffee/Tea Shop</option>
+          <option value="5">Restaurent</option>
+          <option value="6">Photocopier Shop</option>
+          <option value="7">Juice Shop</option>
+        </select>
+      </div>
+      <button id="create-shop-btn" class="btn">
+        Search
+      </button>
+    </form>
+  </div>
+
+  {% for message in messages %} 
+  <script type="text/javascript">
+    function my_func(){
+      alert('{{message}}');      
+     }       
+    my_func();
+   </script>
+  {% endfor %}
+  
+</body>
+
+</html>

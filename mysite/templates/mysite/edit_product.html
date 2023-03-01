@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'mysite/styles/add_product.css' %}" />
+  <title>Edit Product</title>
+</head>
+
+<body>
+  <div class="container">
+
+
+    <h2 class="title"> Edit Product </h2>
+    <form action="/after_edit_product" method="post" class="sign-in-form">
+      {% csrf_token %}
+      <input type="hidden" name="_id_" value={{id}}>
+      <input type="hidden" name="product_id" value={{product_id}}>
+
+
+      <div class="input-field">
+        <i class="fas fa-tag"></i>
+        <input id="product-name" name="name" type="text" placeholder="Name" value="{{name}}" />
+      </div>
+
+      <div class="input-field">
+        <i class="fas fa-info"></i>
+        <input id="product-details" name="details" type="text" placeholder="Details" value="{{details}}" />
+      </div>
+      <div class="input-field">
+        <i class="fas fa-dollar-sign"></i>
+        <input id="product-price" name="price" type="number" placeholder="Price" value="{{price}}" />
+      </div>
+      <div class="input-field">
+        <i class="fas fa-plus"></i>
+        <input id="product-quantity" name="quantity" value="{{quantity}}" type="number" placeholder="Available Quantity" />
+      </div>
+      <div class="input-field">
+        <i class="fas fa-clock"></i>
+        <input id="product-prep-time" name="prep_time" value="{{prep_time}}" type="number"
+          placeholder="Prepration Time (in Minutes)" />
+      </div>
+      <button id="add-product-btn" class="btn">
+        Edit
+      </button>
+    </form>
+  </div>
+
+  {% for message in messages %} 
+  <script type="text/javascript">
+    function my_func(){
+      alert('{{message}}');      
+     }       
+    my_func();
+   </script>
+  {% endfor %}
+  
+</body>
+
+</html>
